@@ -1,6 +1,6 @@
 <ul class="c-sidebar-nav">
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('dashboard')}}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-newspaper") }}"></use>
       </svg>
@@ -8,7 +8,7 @@
     </a>
   </li>
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('admin.organizations')}}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-people") }}"></use>
       </svg>
@@ -16,7 +16,7 @@
     </a>
   </li>
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('institutions')}}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-institution") }}"></use>
       </svg>
@@ -25,7 +25,7 @@
   </li>
 
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('campuses')}}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset('icons/sprites/free.svg#cil-building')}}"></use> 
       </svg>
@@ -33,7 +33,7 @@
     </a>
   </li>
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('careers')}}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset('icons/sprites/free.svg#cil-school')}}"></use> 
       </svg>
@@ -42,7 +42,7 @@
   </li>
 
   <li class="c-sidebar-item">
-    {{-- <a class="c-sidebar-nav-link" href="{{ route('users') }}"> --}}
+    <a class="c-sidebar-nav-link" href="">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset('icons/sprites/free.svg#cil-user-follow')}}"></use> 
       </svg>

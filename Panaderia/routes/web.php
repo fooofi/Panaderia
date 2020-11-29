@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::post('/organizations/create', [Web\OrganizationController::class, 'store'])->name(
         //     'organizations.create'
         // );
-    });
+    // });
 
 
     // Route::group(['middleware' => ['role:admin'], 'prefix' => 'users', 'as' => 'users'], function () {

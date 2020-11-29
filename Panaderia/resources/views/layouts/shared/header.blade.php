@@ -25,7 +25,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right pt-0">
                 <h6 class="dropdown-header" >{{ auth()->user()->name . ' ' . auth()->user()->lastname}}</h6>
-                {{-- <a class="dropdown-item" href="{{ route('user.password') }}"> --}}
+                <a class="dropdown-item" href="">
                   <svg class="c-icon mr-2">
                     <use href="{{ asset('icons/sprites/free.svg#cil-https') }}"></use>
                   </svg>
