@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-// use App\Models\Organization;
 use Illuminate\Support\Facades\Log;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -33,5 +32,6 @@ class HomeController extends Controller
         //     return $this->executive();
         // }
     }
+
 
 }

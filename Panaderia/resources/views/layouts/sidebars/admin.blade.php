@@ -8,7 +8,7 @@
     </a>
   </li>
   <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="#">
+  <a class="c-sidebar-nav-link" href="{{ route('admin.production')}}">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-people") }}"></use>
       </svg>

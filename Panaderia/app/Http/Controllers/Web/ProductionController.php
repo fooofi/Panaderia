@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-// use App\Models\Organization;
+
 use Illuminate\Support\Facades\Log;
 
-class HomeController extends Controller
+class ProductionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,13 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('admin.dashboard');
-        // if ($user->hasRole('manager')) {
-        //     return $this->manager();
-        // }
-        // if ($user->hasRole('executive')) {
-        //     return $this->executive();
-        // }
+        return view('admin.production.index');
+
     }
 
 }

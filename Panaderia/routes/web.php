@@ -18,7 +18,10 @@ Auth::routes(['register' => false, 'verify' => false]);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [Web\HomeController::class, 'index'])->name('dashboard');
 
-    // Route::group(['middleware' => ['role:admin'], 'as' => 'admin.'], function () {
+    
+    Route::group(['as' => 'admin.'], function () {
+
+        Route::get('/production', [Web\ProductionController::class, 'index'])->name('production');
         // Admin Routes
         // Route::get('/organizations', [Web\OrganizationController::class, 'index'])->name('organizations');
 
@@ -28,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::post('/organizations/create', [Web\OrganizationController::class, 'store'])->name(
         //     'organizations.create'
         // );
-    // });
+    });
 
 
     // Route::group(['middleware' => ['role:admin'], 'prefix' => 'users', 'as' => 'users'], function () {
