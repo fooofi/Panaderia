@@ -1,0 +1,20 @@
+// Variables overrides
+
+$turquoise: #0190b9;
+$blue: #3a4052;
+$red: #eb5757;
+$white: #ffffff;
+
+$theme-colors: (
+    "primary": $turquoise,
+    "secondary": $blue,
+    "danger": $red,
+);
+
+$pagination-active-bg: $blue;
+$pagination-hover-bg:  $blue;
+$pagination-hover-color: $white;
+$dropdown-link-hover-bg: $blue;
+$dropdown-link-hover-color: $white;
+
+

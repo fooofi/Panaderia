@@ -1,0 +1,43 @@
+// Here you can add other styles
+
+.c-header.c-header-fixed {
+    top: 0x;
+}
+
+.click-file {
+    cursor: pointer;
+}
+
+.card-columns {
+  @include media-breakpoint-only('sm'){
+    column-count: 1;
+  }
+  @include media-breakpoint-only('md'){
+    column-count: 2;
+  }
+  @include media-breakpoint-only('lg'){
+    column-count: 2;
+  }
+  @include media-breakpoint-only('xl'){
+    column-count: 3;
+  }
+  @include media-breakpoint-only('xxl'){
+    column-count: 4;
+  }
+}
+.card-header-action {
+  @extend .card-header-action;
+  color: $white;
+  &:hover{
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.btn-primary {
+  @extend .btn-primary;
+  &:hover {
+    background-color: $blue;
+    border-color: $blue;
+  }
+}

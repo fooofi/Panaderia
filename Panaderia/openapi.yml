@@ -1,0 +1,732 @@
+openapi: 3.0.2
+info:
+  title: MundoTes
+  version: 1.3.1
+servers:
+  - url: 'https://portal.dev.mundotes.cl'
+paths:
+  /oauth/token:
+    post:
+      tags:
+        - fair users
+      summary: Create Fair User Access Token
+      description: Generates the Access Token for the specified Fair User or Refresh the Access Token using the Refresh Token
+      requestBody:
+        description: Access Token generation using Client and Fair User data
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/PasswordGrant'
+                - $ref: '#/components/schemas/RefreshGrant'
+      responses:
+        '200':
+          description: Successful generation of Access Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    format: int64
+                    type: integer
+                  refresh_token:
+                    type: string
+                  token_type:
+                    type: string
+        '400':
+          description: Unsucessful generation of Access Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                  hint:
+                    type: string
+                  message:
+                    type: string
+      security: []
+  /api/register:
+    post:
+      tags:
+        - fair users
+      summary: Create a Fair User
+      description: Register a new Fair User
+      requestBody:
+        description: Fair User data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  format: int64
+                  type: integer
+                client_secret:
+                  type: string
+                fairuser:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    lastname:
+                      type: string
+                    rut:
+                      type: string
+                    phone:
+                      type: string
+                    email:
+                      type: string
+                    birthday:
+                      format: date
+                      type: string
+                    commune_id:
+                      format: int64
+                      type: integer
+                    password:
+                      format: password
+                      type: string
+                    password_confirmation:
+                      format: password
+                      type: string
+      responses:
+        '201':
+          $ref: '#/components/responses/CreatedResponse'
+        '400':
+          $ref: '#/components/responses/ErrorClient'
+        '422':
+          $ref: '#/components/responses/ErrorValidation'
+      security: []
+  /api/countries:
+    get:
+      tags:
+        - location
+      summary: Retrieve the Countries
+      description: Returns all the stored countries.
+      responses:
+        '200':
+          $ref: '#/components/responses/Locations'
+      security: []
+  '/api/countries/{country_id}/regions':
+    get:
+      tags:
+        - location
+      summary: Retrieve the Regions of a Country
+      description: Returns all the stored Regions for a given Country.
+      parameters:
+        - name: country_id
+          in: path
+          description: Country ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Locations'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+      security: []
+  '/api/countries/{country_id}/regions/{region_id}/provinces':
+    get:
+      tags:
+        - location
+      summary: Retrieve the Provinces of a Region
+      description: Returns all the stored Provinces for a given Region
+      parameters:
+        - name: country_id
+          in: path
+          description: Country ID
+          required: true
+          schema:
+            type: integer
+        - name: region_id
+          in: path
+          description: Region ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Locations'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+      security: []
+  '/api/countries/{country_id}/regions/{region_id}/provinces/{province_id}/communes':
+    get:
+      tags:
+        - location
+      summary: Retrieve the Communes of a Province
+      description: Returns all the stored Communes for a given Region
+      parameters:
+        - name: country_id
+          in: path
+          description: Country ID
+          required: true
+          schema:
+            type: integer
+        - name: region_id
+          in: path
+          description: Region ID
+          required: true
+          schema:
+            type: integer
+        - name: province_id
+          in: path
+          description: Province ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Locations'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+      security: []
+  /api/fairuser:
+    get:
+      tags:
+        - fair users
+      summary: Retrieve User data
+      description: Returns the stored data of the User
+      responses:
+        '200':
+          description: Successful request of the Fair User
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fairuser:
+                    type: object
+                    properties:
+                      '':
+                        $ref: '#/components/schemas/FairUser'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+  /api/fairuser/survey:
+    post:
+      tags:
+        - fair users
+      summary: Create a Fair Survey
+      description: Creates a Fair User Survey or returns the existing Survey for that Fair User.
+      requestBody:
+        description: Survey data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FairSurvey'
+      responses:
+        '201':
+          $ref: '#/components/responses/CreatedResponse'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '422':
+          $ref: '#/components/responses/ErrorValidation'
+    get:
+      tags:
+        - fair users
+      summary: Retrieve the Fair Survey
+      description: Returns the Survey associated with the Fair User or returns an error if it doesn't exists.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  survey:
+                    type: object
+                    properties:
+                      '':
+                        $ref: '#/components/schemas/FairSurvey'
+        '401':
+          $ref: '#/components/responses/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+  /api/regions:
+    get:
+      tags:
+        - location
+      summary: List all the Regions
+      description: Returns all the stored Regions.
+      responses:
+        '200':
+          description: Successful response for listing all the regions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  regions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: ID of the Region
+                          format: int64
+                          type: integer
+                        name:
+                          description: Name of the Region
+                          type: string
+  /api/schools/search:
+    get:
+      tags:
+        - search
+      summary: Search for School
+      description: Returns at most 20 Schools that match the name and commune.
+      parameters:
+        - name: search
+          in: query
+          description: Text to search
+          required: true
+          schema:
+            type: string
+        - name: commune
+          in: query
+          description: Commune ID of the Object
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Search'
+        '422':
+          $ref: '#/components/responses/ErrorValidation'
+      security: []
+  /api/communes/search:
+    get:
+      tags:
+        - search
+      summary: Search for Commune
+      description: Returns at most 20 Communes that match the given name.
+      parameters:
+        - name: search
+          in: query
+          description: Text to search
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Search'
+        '422':
+          $ref: '#/components/responses/ErrorValidation'
+      security: []
+  '/api/images/{id}':
+    get:
+      tags:
+        - images
+      summary: Retrieves an Image
+      description: Retrieves the image based on its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful query for an image
+          content:
+            image/jpeg:
+              schema:
+                format: binary
+                type: string
+            image/png:
+              schema:
+                format: binary
+                type: string
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+      security: []
+  /api/institutions:
+    get:
+      tags:
+        - institutions
+      summary: List Institutions
+      description: Retrieves all the Institutions based on the query.
+      parameters:
+        - name: type
+          in: query
+          description: ID of the Institution Type
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        '200':
+          description: Successful response for listing Institutions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    description: Amount of Institutions
+                    type: string
+                  institutions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Institution'
+        '422':
+          $ref: '#/components/responses/ErrorValidation'
+      security: []
+  /api/institutions/types:
+    get:
+      tags:
+        - institutions
+      summary: Retrieve Institution Types
+      description: Retrieves all the Institution Types.
+      responses:
+        '200':
+          description: Successful response for listing Institution Types
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  types:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          format: int64
+                          type: integer
+                        name:
+                          type: string
+      security: []
+  /api/institutions/regions:
+    get:
+      tags:
+        - institutions
+      summary: Count Institutions by Region.
+      description: Retrieves and counts all the Institutions that have a Faculty on each Region.
+      responses:
+        '200':
+          description: Successful response for counting the institutions by region
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  regions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: ID of the Region
+                          format: int64
+                          type: integer
+                        name:
+                          description: Name of the Region
+                          type: string
+                        count:
+                          description: Institutions in that Region
+                          format: int32
+                          type: integer
+      security: []
+  '/api/institutions/{id}':
+    get:
+      tags:
+        - institutions
+      summary: Retrieve a Institution
+      description: Retrieves the Institution based on its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response for retrieving a Institution
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  institution:
+                    type: object
+                    properties:
+                      '':
+                        $ref: '#/components/schemas/Institution'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+      security: []
+  /api/grades:
+    get:
+      tags:
+        - fair users
+      summary: List all Grades
+      description: Returns all the store Grades.
+      responses:
+        '200':
+          description: Successful response for listing grades
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  grades:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: ID of the Grade
+                          format: int64
+                          type: integer
+                        name:
+                          description: Name of the Grade
+                          type: string
+      security: []
+components:
+  schemas:
+    Institution:
+      type: object
+      properties:
+        id:
+          description: ID of the Institution
+          type: integer
+        name:
+          description: Name of the Institution
+          type: string
+        type:
+          description: Type of Institution
+          type: string
+        dependency:
+          description: Dependency of the Institution
+          type: string
+        link:
+          description: External Link of the Institution
+          type: string
+        cruch:
+          description: Member of the CRUCh
+          type: boolean
+        sua:
+          description: Member of the Sistema Unico de Admisión
+          type: boolean
+        gratuidad:
+          description: Has Gratuidad
+          type: boolean
+        logo:
+          description: ID of the image containing the Logo
+          type: integer
+    FairSurvey:
+      type: object
+      properties:
+        school:
+          type: string
+        grade:
+          type: string
+        university:
+          type: boolean
+        ip:
+          type: boolean
+        cft:
+          type: boolean
+        ffaa:
+          type: boolean
+        gratuidad:
+          type: boolean
+        cae:
+          type: boolean
+        becas:
+          type: boolean
+        propio:
+          type: boolean
+        career:
+          type: string
+        institution:
+          type: string
+    Location:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+    FairUser:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        lastname:
+          type: string
+        rut:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        birthday:
+          format: date
+          type: string
+        commune_id:
+          format: int64
+          type: integer
+        commune:
+          type: string
+        survey:
+          type: boolean
+    PasswordGrant:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        client_secret:
+          type: string
+        grant_type:
+          type: string
+          example: "password"
+        username:
+          type: string
+          example: "test@test.com"
+        password:
+          type: string
+          format: password
+        scope:
+          type: string
+          example: ""
+    RefreshGrant:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          format: int64
+        client_secret:
+          type: string
+        grant_type:
+          type: string
+          example: "refresh_token"
+        refresh_token:
+          type: string
+        scope:
+          type: string
+          example: ""
+  responses:
+    Search:
+      description: Search responses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              count:
+                format: int32
+                type: integer
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      format: int64
+                      type: number
+                    name:
+                      type: string
+                example:
+                  - id: 1
+                    name: Name of object
+    ErrorNotFound:
+      description: Not found errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: The object was not found
+    ErrorValidation:
+      description: Validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: The given data was invalid.
+              errors:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+                example:
+                  field:
+                    - Something is wrong with this field!
+    Locations:
+      description: 'Successful response for Countries, Regions, Provinces and Communes'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              '[location_name]':
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+    ErrorClient:
+      description: Mismatch of client credentials
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid client credentials
+    CreatedResponse:
+      description: Created succesfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Object created successfully
+    ErrorUnauthorized:
+      description: The user is not authorized or authenticated
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                default: Unauthenticated
+                type: string
+  securitySchemes:
+    OAuth:
+      type: http
+      description: OAuth 2.0 Authorization
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - OAuth: []
+tags:
+  - name: fair users
+    description: Fair users
+  - name: location
+    description: Regional location
+  - name: search
+    description: Search methods
+  - name: institutions
+    description: Institutions
