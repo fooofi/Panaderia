@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('rut');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('organization_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

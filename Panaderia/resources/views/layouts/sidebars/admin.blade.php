@@ -1,6 +1,6 @@
 <ul class="c-sidebar-nav">
   <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
+    <a class="c-sidebar-nav-link" href="#">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-newspaper") }}"></use>
       </svg>
@@ -8,46 +8,30 @@
     </a>
   </li>
   <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
+    <a class="c-sidebar-nav-link" href="#">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-people") }}"></use>
       </svg>
-      <div>Organizaciones</div>
+      <div>Produccion</div>
     </a>
   </li>
   <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
+    <a class="c-sidebar-nav-link" href="#">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-institution") }}"></use>
       </svg>
-      <div>Instituciones</div>
+      <div>Despacho</div>
     </a>
   </li>
 
-  <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
+    <li class="c-sidebar-item">
+    <a class="c-sidebar-nav-link" href="#">
       <svg class="c-sidebar-nav-icon">
-        <use href="{{ asset('icons/sprites/free.svg#cil-building')}}"></use> 
+        <use href="{{ asset("icons/sprites/free.svg#cil-institution") }}"></use>
       </svg>
-      <div>Facultades</div>
-    </a>
-  </li>
-  <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
-      <svg class="c-sidebar-nav-icon">
-        <use href="{{ asset('icons/sprites/free.svg#cil-school')}}"></use> 
-      </svg>
-      <div>Carreras</div>
+      <div>Reportes</div>
     </a>
   </li>
 
-  <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="">
-      <svg class="c-sidebar-nav-icon">
-        <use href="{{ asset('icons/sprites/free.svg#cil-user-follow')}}"></use> 
-      </svg>
-      <div>Usuarios</div>
-    </a>
-  </li>
 
 </ul>
