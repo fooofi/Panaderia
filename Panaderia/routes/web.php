@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['as' => 'admin.'], function () {
 
         Route::get('/production', [Web\ProductionController::class, 'index'])->name('production');
+
+        Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
         
         // Admin Routes
         // Route::get('/organizations', [Web\OrganizationController::class, 'index'])->name('organizations');
