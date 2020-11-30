@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::post('/organizations/create', [Web\OrganizationController::class, 'store'])->name(
         //     'organizations.create'
         // );
+        
     });
 
 
