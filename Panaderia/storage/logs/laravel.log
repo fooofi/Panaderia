@@ -1,0 +1,2 @@
+asadsdsa[2020-11-30 00:21:25] local.ERROR: [Elastic APM Agent] Sending to APM failed, request error: cURL error 7: Failed to connect to 172.31.35.45 port 8200: Connection timed out (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for http://172.31.35.45:8200/intake/v2/events  
+[2020-11-30 00:21:27] local.ERROR: [Elastic APM Agent] Sending to APM failed, request error: cURL error 7: Failed to connect to 172.31.35.45 port 8200: Connection timed out (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for http://172.31.35.45:8200/intake/v2/events  

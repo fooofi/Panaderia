@@ -40,10 +40,6 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'passport',
-            'provider' => 'fair_users',
-        ],
     ],
 
     /*
@@ -69,10 +65,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'fair_users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\FairUser::class,
-        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
