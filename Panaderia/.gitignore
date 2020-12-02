@@ -14,3 +14,4 @@ yarn-error.log
 logging.sh
 .prettierrc
 Panaderia.code-workspace
+/.vscode/*
