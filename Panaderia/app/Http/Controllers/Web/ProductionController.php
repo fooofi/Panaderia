@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
+use App\Models\Production;
 
 use Illuminate\Support\Facades\Log;
 
@@ -25,8 +26,22 @@ class ProductionController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('admin.production.index');
 
+        $productions = Production::all()->map(function ($production) {
+            
+            return (object) [
+                'id' => $production->id,
+            ];
+        })->paginate();
+        return view('admin.production.index', [
+            'productions' => $productions,
+        ]);
+
+    }
+    public function create()
+    {
+        $user = auth()->user();
+        return view('admin.production.create');
     }
 
 }

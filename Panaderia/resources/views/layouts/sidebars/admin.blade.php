@@ -50,7 +50,7 @@
     </a>
   </li>
     <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="#">
+    <a class="c-sidebar-nav-link" href="{{ route('admin.report')}}">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-chart-line") }}"></use>
       </svg>

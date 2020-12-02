@@ -44,6 +44,7 @@ class ProductController extends Controller
                 return (object) [
                 'id'   => $material->id,
                 'name' => $material->name,
+                'measure' => $material->type_measure->name,
                 'quantity' => $proMat->quantity
                 ];
             });

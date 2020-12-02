@@ -41,13 +41,7 @@
                     <ul>
                     @if (count($product->materials) != 0)
                     @foreach ($product->materials as $material)
-                        <li>{{ $material->name }}
-                          <ul>
-                            <li>
-                            {{ $material->quantity }}
-                            </li>
-                          </ul>
-                        </li>
+                    <li>{{ $material->name }} - {{ $material->quantity }} {{ $material->measure }}</li>
                     @endforeach
                     @endif
                     </ul>

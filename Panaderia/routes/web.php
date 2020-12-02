@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/production', [Web\ProductionController::class, 'index'])->name('production');
 
+        Route::get('/production/create', [Web\ProductionController::class, 'index'])->name('production.create');
+
         Route::get('/material', [Web\MaterialController::class, 'index'])->name('material');
 
         Route::get('/material/create', [Web\MaterialController::class, 'create'])->name('material.create');
@@ -34,6 +36,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/order', [Web\OrderController::class, 'index'])->name('order');
 
         Route::get('/order/create', [Web\OrderController::class, 'create'])->name('order.create');
+
+        Route::get('/report', [Web\ReportController::class, 'index'])->name('report');
 
         Route::get('/client', [Web\ClientController::class, 'index'])->name('client');
 
