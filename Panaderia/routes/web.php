@@ -23,6 +23,14 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/production', [Web\ProductionController::class, 'index'])->name('production');
 
+        Route::get('/material', [Web\MaterialController::class, 'index'])->name('material');
+
+        Route::get('/material/create', [Web\MaterialController::class, 'create'])->name('material.create');
+
+        Route::get('/product', [Web\ProductController::class, 'index'])->name('product');
+
+        Route::get('/product/create', [Web\ProductController::class, 'create'])->name('product.create');
+
         Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
         
         // Admin Routes
@@ -36,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         // );
         
     });
+
 
 
     // Route::group(['middleware' => ['role:admin'], 'prefix' => 'users', 'as' => 'users'], function () {

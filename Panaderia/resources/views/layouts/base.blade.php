@@ -15,12 +15,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset("assets/favicon/favicon-16x16.png")}} ">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="{{ asset("assets/favicon/favicon-16x16.png")}} ">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset("assets/favicon/favicon-32x32.png") }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset("assets/favicon/favicon-192x192.png") }}">
     <link rel="icon" type="image/png" sizes="512x512" href="{{ asset("assets/favicon/favicon-512x512.png") }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("assets/favicon/apple-touch-icon.png") }}">
-    <link rel="manifest" href="{{ asset("assets/favicon/site.webmanifest") }}">
+    <link rel="manifest" href="{{ asset("assets/favicon/site.webmanifest") }}"> -->
     <meta name="theme-color" content="#ffffff">
     <!-- Icons-->
     <link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
@@ -42,8 +42,8 @@
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand">
-        <img class="c-sidebar-brand-full" src="{{ asset("assets/brand/logo-nuevo-white.svg") }}" width="230" height="38" alt="MundoHome Logo">
-        <img class="c-sidebar-brand-minimized" src="{{ asset("assets/brand/logo-nuevo-signet-white.svg") }}" width="45" height="40" alt="MundoHome Logo">
+        <img class="c-sidebar-brand-full" src="{{ asset("assets/brand/logo11.png") }}" width="186" height="58" alt="Logo">
+        <img class="c-sidebar-brand-minimized" src="{{ asset("assets/brand/logo222.png") }}" width="48" height="48" alt="Logo">
       </div>
 
           @yield('sidebar')
