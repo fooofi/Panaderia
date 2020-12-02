@@ -2,22 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Campus;
-use App\Models\CampusCareer;
-use App\Models\Career;
-use App\Models\CarrerScore;
-use App\Models\CareerScholarship;
-use App\Models\FairSurvey;
-use App\Models\FairUser;
+
+use App\Models\Client;
+use App\Models\Dealer;
+use App\Models\RawMaterial;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Organization;
-use App\Models\OrganizationType;
-use App\Models\Institution;
-use App\Models\InstitutionDependency;
-use App\Models\InstitutionType;
-use App\Models\Scholarship;
-use Database\Factories\OrganizationFactory;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Faker\Factory;
@@ -32,6 +22,8 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
+
         User::create([
             'name' => 'Admin',
             'lastname' => 'Test',
@@ -40,6 +32,41 @@ class TestSeeder extends Seeder
             'password' => Hash::make('1234567890'),
         ])
             ->assignRole('admin');
+
+        User::create([
+            'name' => 'Aldo',
+            'lastname' => 'Gonzalez',
+            'rut' => '8105573-4',
+            'email' => 'panlostresantonios@hotmail.com',
+            'password' => Hash::make('1234567890'),
+        ])
+            ->assignRole('admin');
+
+        $repartidor1 = Dealer::create([
+            'name' => 'Repartidor',
+            'lastname' => '1',
+            'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
+            'email' => $faker->unique()->safeEmail,
+        ]);
+
+        $repartidor2 = Dealer::create([
+            'name' => 'Repartidor',
+            'lastname' => '2',
+            'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
+            'email' => $faker->unique()->safeEmail,
+        ]);
+
+        $client1 = Client::Create([
+            'name' => 'Cliente 1',
+            'direction' => $faker->streetAddress,
+            'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
+        ]);
+
+        $client1 = Client::Create([
+            'name' => 'Cliente 2',
+            'direction' => $faker->streetAddress,
+            'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
+        ]);
     
     }
 }

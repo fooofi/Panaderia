@@ -15,7 +15,7 @@ class Product extends Model
 
     public function raw_materials()
     {
-        return $this->belongsToMany(RawMaterial::class)->using(ProductRawMaterial::class);
+        return $this->belongsToMany(RawMaterial::class,'quantity')->using(ProductRawMaterial::class);
     }
 
     public function measure()
@@ -26,5 +26,17 @@ class Product extends Model
     public function type()
     {
         return $this->belongsTo(TypeProduct::class);
+    }
+
+    public function cost()
+    {
+        $sum = 0;
+
+        foreach ($this->raw_materials() as $raw_material)
+        {
+            $sum += $raw_material->cost;
+        }
+
+        return $sum;
     }
 }

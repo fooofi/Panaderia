@@ -18,6 +18,7 @@ class CreateProductRawMaterialsTable extends Migration
             $table->timestamps();
             $table->foreignId('raw_material_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->integer('quantity')->unsigned()->nullable()->default(1);
         });
     }
 

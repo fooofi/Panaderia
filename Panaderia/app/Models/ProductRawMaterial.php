@@ -11,7 +11,8 @@ class ProductRawMaterial extends Pivot
     use HasFactory;
     protected $fillable = [
         'raw_material_id',
-        'product_id'
+        'product_id',
+        'quantity'
     ];
 
 

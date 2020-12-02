@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product;
+use App\Models\RawMaterial;
+use App\Models\TypeMeasure;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
@@ -25,13 +27,51 @@ class ProductController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('admin.product.index');
 
+        $pros = collect(Product::paginate()->items());
+
+        $products = $pros->map(function ($product) {
+            return (object) [
+                'id'            => $product->id,
+                'name' => $product->name,
+                'measure'  => $product->measure,
+                'materials'           => $product->materials,
+                'cost'          => $product->cost,
+            ];
+        });
+
+
+        return view('admin.product.index', [
+            'products' => $products,
+        ]);
     }
     public function create()
     {
         $user = auth()->user();
-        return view('admin.product.create');
+
+        $materials = RawMaterial::all()->map(function ($rawMaterial) {
+            
+            return (object) [
+                'id' => $rawMaterial->id,
+                'name' => $rawMaterial->name,
+                'stock' => $rawMaterial->stock,
+                'type_measure' => $rawMaterial->measure->name,
+                'cost' => $rawMaterial->cost,
+            ];
+        });
+
+        $measures = TypeMeasure::all();
+        
+        return view('admin.product.create',
+        [
+            'materials' => $materials,
+            'measures'  => $measures
+        ]);
+    }
+
+    public function storage()
+    {
+
     }
 
 }
