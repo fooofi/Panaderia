@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('dealer_id')->constrained()->onDelete('cascade');
             $table->string('detail')->nullable()->default(null);
             $table->integer('total_to_pay');
+            $table->integer('decrease')->nullable()->default(0);
 
         });
     }

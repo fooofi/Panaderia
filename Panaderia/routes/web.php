@@ -33,6 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/product/create', [Web\ProductController::class, 'create'])->name('product.create');
 
+        Route::post('/product/create', [Web\ProductController::class, 'store'])->name('product.create');
+
+        Route::post('/product/delete', [Web\ProductController::class, 'product_delete'])->name('product.delete');
+
         Route::get('/order', [Web\OrderController::class, 'index'])->name('order');
 
         Route::get('/order/create', [Web\OrderController::class, 'create'])->name('order.create');

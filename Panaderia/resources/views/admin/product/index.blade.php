@@ -49,14 +49,14 @@
                     <td scope="row">{{ $product->cost }}</td>
                     <td scope="row">
                       <div class="btn-group" role="group" aria-label="">
-                        <a role="button" class="btn btn-ghost-secondary" href="#" data-toggle="tooltip" data-placement="top" title="Editar material">
+                        <a role="button" class="btn btn-ghost-secondary" href="#" data-toggle="tooltip" data-placement="top" title="Editar producto">
                           <svg class="c-icon">
                             <use href="{{ asset('icons/sprites/free.svg#cil-external-link')}}"></use>
                           </svg>
                         </a>
                       {{--   --}}
-                        <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="">
-                          <svg class="c-icon" data-toggle="tooltip" data-placement="top" title="Eliminar material" >
+                        <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="{{ '#DeleteProduct' . $product->id . 'Modal' }}">
+                          <svg class="c-icon" data-toggle="tooltip" data-placement="top" title="Eliminar producto" >
                             <use href="{{ asset('icons/sprites/free.svg#cil-trash ')}}" ></use>
                           </svg>
                         </button>
@@ -77,6 +77,31 @@
       </div>
     </div>
   </div>
+
+    @foreach($products as $product)
+                <div class="modal fade" id="{{ 'DeleteProduct' . $product->id . 'Modal' }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'DeleteProduct' . $product->id . 'Modal' }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="{{ 'DeleteProduct' . $product->id . 'ModalLabel' }}"> ¿Está seguro de eliminar este producto?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="POST" action="{{ route('admin.product.delete') }}">
+                                @csrf
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <input  type="hidden" name="id" value="{{ $product->id }}">
+                                    <button type="submit" class="btn btn-danger btn_user_delete">Eliminar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 @endsection
 
 @section('javascript')

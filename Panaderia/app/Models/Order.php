@@ -17,6 +17,7 @@ class Order extends Model
         'dealer_id',
         'detail',
         'total_to_pay',
+        'decrease'
     ];
 
     public function products()
