@@ -11,11 +11,13 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'type_product_id',
+        'type_measure_id',
     ];
 
     public function raw_materials()
     {
-        return $this->belongsToMany(RawMaterial::class,'quantity')->using(ProductRawMaterial::class);
+        return $this->belongsToMany(RawMaterial::class)->using(ProductRawMaterial::class);
     }
 
     public function measure()
@@ -28,11 +30,11 @@ class Product extends Model
         return $this->belongsTo(TypeProduct::class);
     }
 
-    public function cost()
+    public function get_cost()
     {
         $sum = 0;
 
-        foreach ($this->raw_materials() as $raw_material)
+        foreach ($this->raw_materials as $raw_material)
         {
             $sum += $raw_material->cost;
         }

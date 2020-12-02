@@ -5,7 +5,11 @@ namespace Database\Seeders;
 
 use App\Models\Client;
 use App\Models\Dealer;
+use App\Models\Product;
+use App\Models\ProductRawMaterial;
 use App\Models\RawMaterial;
+use App\Models\TypeMeasure;
+use App\Models\TypeProduct;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -67,6 +71,64 @@ class TestSeeder extends Seeder
             'direction' => $faker->streetAddress,
             'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
         ]);
+        
+        $measure1 = TypeMeasure::Create([
+            'name' => 'Kilos',
+        ]);
+
+        $measure2 = TypeMeasure::Create([
+            'name' => 'Litros',
+        ]);
+
+        $measure3 = TypeMeasure::Create([
+            'name' => 'Quintales',
+        ]);
+
+        $measure4 = TypeMeasure::Create([
+            'name' => 'Unidad',
+        ]);
+
+        $material1 = RawMaterial::Create([
+            'name' => 'Harina',
+            'stock' => $faker->numberBetween(1,100 ),
+            'cost' =>   $faker->numberBetween(1000,50000),
+            'type_measure_id' => $measure3->id,
+        ]);
     
+        $material2 = RawMaterial::Create([
+            'name' => 'Mantequilla',
+            'stock' => $faker->numberBetween(1,100 ),
+            'cost' =>   $faker->numberBetween(1000,50000),
+            'type_measure_id' => $measure1->id,
+        ]);
+
+        $material3 = RawMaterial::Create([
+            'name' => 'Aceite',
+            'stock' => $faker->numberBetween(1,100 ),
+            'cost' =>   $faker->numberBetween(1000,50000),
+            'type_measure_id' => $measure2->id,
+        ]);
+        
+        $typeProduct = TypeProduct::Create([
+            'name' => 'Masas',
+        ]);
+
+        $product = Product::create([
+            'name' => 'Pan',
+            'type_product_id' => $typeProduct->id,
+            'type_measure_id' => $measure1->id,
+        ]);
+
+        ProductRawMaterial::Create([
+            'product_id' => $product->id,
+            'raw_material_id' => $material1->id,
+            'quantity' => $faker->numberBetween(1,10 ),
+        ]);
+
+        ProductRawMaterial::Create([
+            'product_id' => $product->id,
+            'raw_material_id' => $material2->id,
+            'quantity' => $faker->numberBetween(1,10 ),
+        ]);
     }
 }
