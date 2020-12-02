@@ -11,9 +11,9 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header text-value-lg">
-              Productos
+              Despachos
               <div class="card-header-actions">
-                <a class="card-header-action btn btn-lg btn-primary" role="button" href="{{ route('admin.product.create')}}">
+                <a class="card-header-action btn btn-lg btn-primary" role="button" href="{{ route('admin.order.create')}}">
                   <svg class="c-icon mx-1 my-1">
                     <use href="{{ asset('icons/sprites/free.svg#cil-plus')}}"></use>
                   </svg>
@@ -25,34 +25,27 @@
               <table class="table table-responsive-sm table-hover table-outline">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Medida</th>
-                    <th scope="col">Materiales</th>
-                    <th scope="col">Costo</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Repartidor</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                @foreach ($products as $product)
                   <tr>
-                    <td scope="row">{{ $product->name }}</td>
-                    <td scope="row">{{ $product->measure }}</td>
-                    <td scope="row">
-                    <ul>
-                    @if (count($product->materials) != 0)
-                    @foreach ($product->materials as $material)
-                        <li>{{ $material->name }}
-                          <ul>
-                            <li>
-                            {{ $material->quantity }}
-                            </li>
-                          </ul>
-                        </li>
-                    @endforeach
-                    @endif
-                    </ul>
-                    </td>
-                    <td scope="row">{{ $product->cost }}</td>
+                    <td scope="row">1</td>
+                    <td scope="row">02/12/2020</td>
+                    <td scope="row">Sra Juana</td>
+                    <td scope="row">Daniel</td>
+                    <td scope="row">Marraqueta</td>
+                    <td scope="row">15 kg</td>
+                    <td scope="row">se necesita que llegue a la hora</td>
+                    <td scope="row">$12.000</td>
                     <td scope="row">
                       <div class="btn-group" role="group" aria-label="">
                         <a role="button" class="btn btn-ghost-secondary" href="#" data-toggle="tooltip" data-placement="top" title="Editar material">
@@ -69,12 +62,6 @@
                       </div>
                     </td>
                   </tr>
-                  @endforeach
-                  @if (count($products) == 0)
-                  <tr>
-                    <td class="text-center text-value-lg">No ha creado ningún producto</td>
-                  </tr>
-                  @endif
                 </tbody>
               </table>
             </div>

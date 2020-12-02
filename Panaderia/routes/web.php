@@ -31,7 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/product/create', [Web\ProductController::class, 'create'])->name('product.create');
 
-        Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
+        Route::get('/order', [Web\OrderController::class, 'index'])->name('order');
+
+        Route::get('/order/create', [Web\OrderController::class, 'create'])->name('order.create');
+
         
         // Admin Routes
         // Route::get('/organizations', [Web\OrganizationController::class, 'index'])->name('organizations');

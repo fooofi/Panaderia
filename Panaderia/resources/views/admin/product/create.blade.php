@@ -41,21 +41,41 @@
                     </div>
                   </div>
                 </div>
+
+                <br>
+                <h4>Materiales</h4>
+                <br>
                 <div class="form-row">
-                  <div class="form-group col-md-8">
-                    <label for="material_stock">Stock</label>
-                    <input type="number" min="0" class="form-control" id="material_stock" name="material_stock" required pattern="([0-9])" required placeholder="Stock actual del material">
+                @foreach ($materials as $material)
+                <div class="form-group col-md-1"></div>
+                  <div class="form-group col-md-2">
+                    <label class="c-switch c-switch-lg c-switch-pill c-switch-primary">
+                      <label for="material_checkbox-{{$material->id}}" class="text-nowrap">{{$material->name}}</label>
+                      <input type="checkbox" class="c-switch-input" name="material_checkbox-{{$material->id}}" id="material_checkbox-{{$material->id}}">
+                      <span class="c-switch-slider"></span>
+                    </label>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="producto_cantidad">Cantidad</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <input type="number" class="form-control" id="producto_cantidad" name="producto_cantidad" min="0" minlength="9" maxlength="9" required />
+                    </div>
                     <div class="invalid-feedback">
-                      Ingrese un stock válido.
+                      Ingrese una cantidad válida
                     </div>
                   </div>
-                  <div class="form-group col-md-8">
-                    <label for="material_costo">Costo</label>
-                    <input type="number" min="0" class="form-control" id="material_costo" name="material_costo"  placeholder="Costo actual del material">
-                    <div class="invalid-feedback">
-                      Ingrese un costo válido.
+                  <div class="form-group col-md-4">
+                    <label for="phone">Medida</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">{{$material->type_measure}}</span>
+                      </div>
                     </div>
                   </div>
+                  @endforeach
+
                 </div>
                 <button class="btn btn-primary float-right mb-2" type="submit">Enviar</button>
               </div>
