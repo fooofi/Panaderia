@@ -21,7 +21,7 @@ class RawMaterial extends Model
         return $this->belongsToMany(Product::class)->using(ProductRawMaterial::class);
     }
 
-    public function measure()
+    public function type_measure()
     {
         return $this->belongsTo(TypeMeasure::class);
     }

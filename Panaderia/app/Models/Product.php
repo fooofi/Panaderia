@@ -20,16 +20,17 @@ class Product extends Model
         return $this->belongsToMany(RawMaterial::class)->using(ProductRawMaterial::class);
     }
 
-    public function measure()
+    public function type_measure()
     {
         return $this->belongsTo(TypeMeasure::class);
     }
 
-    public function type()
+    public function type_product()
     {
         return $this->belongsTo(TypeProduct::class);
     }
 
+    // TODO: mejorar formula
     public function get_cost()
     {
         $sum = 0;

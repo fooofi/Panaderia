@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductRawMaterial;
 use App\Models\RawMaterial;
 use App\Models\TypeMeasure;
 use Illuminate\Support\Facades\Log;
@@ -28,15 +29,31 @@ class ProductController extends Controller
     {
         $user = auth()->user();
 
-        $pros = collect(Product::paginate()->items());
+        $pros = Product::all();
 
-        $products = $pros->map(function ($product) {
+        $products = $pros->map(function ($product) 
+        {
+            $materials = $product->raw_materials->map(function($material) use ($product)
+            {
+                $proMat = ProductRawMaterial::where('product_id', $product->id )
+                    ->get()
+                    ->filter(function($proMat) use ($material){
+                        return $proMat->raw_material_id == $material->id;
+                })->first();
+
+                return (object) [
+                'id'   => $material->id,
+                'name' => $material->name,
+                'quantity' => $proMat->quantity
+                ];
+            });
+
             return (object) [
                 'id'            => $product->id,
-                'name' => $product->name,
-                'measure'  => $product->measure,
-                'materials'           => $product->materials,
-                'cost'          => $product->cost,
+                'name'          => $product->name,
+                'measure'       => $product->type_measure->name,
+                'materials'     => $materials,
+                'cost'          => $product->get_cost(),
             ];
         });
 
@@ -55,12 +72,17 @@ class ProductController extends Controller
                 'id' => $rawMaterial->id,
                 'name' => $rawMaterial->name,
                 'stock' => $rawMaterial->stock,
-                'type_measure' => $rawMaterial->measure->name,
+                'type_measure' => $rawMaterial->type_measure->name,
                 'cost' => $rawMaterial->cost,
             ];
         });
 
-        $measures = TypeMeasure::all();
+        $measures = TypeMeasure::all()->map(function ($measure){
+            return (object) [
+                'id' => $measure->id,
+                'name' => $measure->name,
+            ];
+        });
         
         return view('admin.product.create',
         [
