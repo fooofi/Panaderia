@@ -24,17 +24,19 @@
               <div class="card-body">
                 <div class="form-row">
                   <div class="form-group col-md-8">
-                    <label for="material_name">Nombre</label>
-                    <input type="text" class="form-control" id="material_name" name="material_name" required placeholder="Nombre del material">
+                    <label for="product_name">Nombre</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" required placeholder="Nombre del producto">
                     <div class="invalid-feedback">
                       Ingrese un nombre válido
                     </div>
                   </div>
                   <div class="form-group col-md-8">
-                  <label for="material_type">Medida</label>
-                    <select class="custom-select" id="material_type" name="material_type" required>
-                      <option selected disabled value="">Selecciona la unidad de medida del material</option>
-                        <option value=""> </option>
+                  <label for="measure">Medida del producto</label>
+                    <select class="custom-select" id="measure" name="measure" required>
+                      <option selected disabled value="">Selecciona la unidad de medida del producto</option>
+                      @foreach ($measures as $measure)
+                      <option value="{{$measure->id}}">{{$measure->name}}</option>
+                      @endforeach
                     </select>
                     <div class="invalid-feedback">
                       Seleccione una medida válida
@@ -45,8 +47,8 @@
                 <br>
                 <h4>Materiales</h4>
                 <br>
-                <div class="form-row">
                 @foreach ($materials as $material)
+                <div class="form-row">
                 <div class="form-group col-md-1"></div>
                   <div class="form-group col-md-2">
                     <label class="c-switch c-switch-lg c-switch-pill c-switch-primary">
@@ -60,7 +62,7 @@
                     <div class="input-group">
                       <div class="input-group-prepend">
                       </div>
-                      <input type="number" class="form-control" id="producto_cantidad" name="producto_cantidad" min="0" minlength="9" maxlength="9" required />
+                      <input type="number" class="form-control" id="producto_cantidad" name="producto_cantidad" min="0" minlength="9" maxlength="9" />
                     </div>
                     <div class="invalid-feedback">
                       Ingrese una cantidad válida
@@ -74,9 +76,9 @@
                       </div>
                     </div>
                   </div>
-                  @endforeach
-
+                  
                 </div>
+                @endforeach
                 <button class="btn btn-primary float-right mb-2" type="submit">Enviar</button>
               </div>
             </form>
