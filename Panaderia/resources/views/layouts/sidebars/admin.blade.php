@@ -1,6 +1,6 @@
 <ul class="c-sidebar-nav">
   <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="#">
+    <a class="c-sidebar-nav-link" href="{{'/'}}">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-compass") }}"></use>
       </svg>
@@ -49,13 +49,31 @@
       <div>Despacho</div>
     </a>
   </li>
-    <li class="c-sidebar-item">
-    <a class="c-sidebar-nav-link" href="{{ route('admin.report')}}">
+  <li class="c-sidebar-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
       <svg class="c-sidebar-nav-icon">
         <use href="{{ asset("icons/sprites/free.svg#cil-chart-line") }}"></use>
       </svg>
       <div>Reportes</div>
     </a>
+      <ul class="c-sidebar-nav-dropdown-items">
+        <li class="c-sidebar-nav-item">
+          <a class="c-sidebar-nav-link" href="{{ route('admin.report')}}">
+            <svg class="c-sidebar-nav-icon">
+              <use href="{{ asset("icons/sprites/free.svg#cil-chart-line") }}"></use>
+            </svg>
+            <div>Semanal</div>
+          </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+          <a class="c-sidebar-nav-link" href="{{ route('admin.cost')}}">
+            <svg class="c-sidebar-nav-icon">
+              <use href="{{ asset("icons/sprites/free.svg#cil-chart-line") }}"></use>
+            </svg>
+            <div>Costo</div>
+          </a>
+        </li>
+      </ul>
   </li>
   <li class="c-sidebar-item">
     <a class="c-sidebar-nav-link" href="{{ route('admin.dealer')}}">

@@ -53,7 +53,9 @@ Route::group(['middleware' => ['auth']], function () {
         
         Route::post('/order/delete', [Web\OrderController::class, 'order_delete'])->name('order.delete');
         
-        Route::get('/report', [Web\ReportController::class, 'index'])->name('report');
+        Route::get('/report/week', [Web\ReportController::class, 'index'])->name('report');
+
+        Route::get('/report/cost', [Web\ReportController::class, 'cost'])->name('cost');
 
         Route::get('/client', [Web\ClientController::class, 'index'])->name('client');
         

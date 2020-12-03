@@ -29,4 +29,11 @@ class ReportController extends Controller
 
     }
 
+    public function cost()
+    {
+        $user = auth()->user();
+        return view('admin.report.cost');
+
+    }
+
 }
