@@ -44,7 +44,7 @@
                                                         <use href="{{ asset('icons/sprites/free.svg#cil-external-link') }}"></use>
                                                     </svg>
                                                 </a>
-                                                <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="{{ '#DeleteMaterial' . $client->id . 'Modal' }}">
+                                                <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="{{ '#DeleteClient' . $client->id . 'Modal' }}">
                                                     <svg class="c-icon" data-toggle="tooltip" data-placement="top" title="Eliminar producto">
                                                         <use href="{{ asset('icons/sprites/free.svg#cil-trash ') }}"></use>
                                                     </svg>
@@ -61,6 +61,30 @@
         </div>
     </div>
 </div>
+@foreach($clients as $client)
+    <div class="modal fade" id="{{ 'DeleteClient' . $client->id . 'Modal' }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'DeleteClient' . $client->id . 'Modal' }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{ 'DeleteClient' . $client->id . 'ModalLabel' }}"> ¿Está seguro de eliminar esta cliente ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ route('admin.client.delete') }}">
+                    @csrf
+                    {{-- <div class="modal-body">
+                    </div> --}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <input type="hidden" name="id" value="{{ $client->id }}">
+                        <button type="submit" class="btn btn-danger btn_user_delete">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
 @endsection
 
 @section('javascript')

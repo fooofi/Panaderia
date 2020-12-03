@@ -47,7 +47,7 @@
                                                         <use href="{{ asset('icons/sprites/free.svg#cil-external-link') }}"></use>
                                                     </svg>
                                                 </a>
-                                                <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="{{ '#DeleteMaterial' . $dealer->id . 'Modal' }}">
+                                                <button class="btn btn-delete btn-ghost-danger" type="button" data-toggle="modal" data-target="{{ '#DeleteDealer' . $dealer->id . 'Modal' }}">
                                                     <svg class="c-icon" data-toggle="tooltip" data-placement="top" title="Eliminar producto">
                                                         <use href="{{ asset('icons/sprites/free.svg#cil-trash ') }}"></use>
                                                     </svg>
@@ -64,8 +64,31 @@
         </div>
     </div>
 </div>
+@foreach($dealers as $dealer)
+    <div class="modal fade" id="{{ 'DeleteDealer' . $dealer->id . 'Modal' }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'DeleteDealer' . $dealer->id . 'Modal' }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{ 'DeleteDealer' . $dealer->id . 'ModalLabel' }}"> ¿Está seguro de eliminar este repartidor?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ route('admin.dealer.delete') }}">
+                    @csrf
+                    {{-- <div class="modal-body">
+                    </div> --}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <input type="hidden" name="id" value="{{ $dealer->id }}">
+                        <button type="submit" class="btn btn-danger btn_user_delete">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
 @endsection
-
 @section('javascript')
 <script>
     $(function() {

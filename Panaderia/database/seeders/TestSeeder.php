@@ -90,6 +90,10 @@ class TestSeeder extends Seeder
             'name' => 'Unidad',
         ]);
 
+        $measure5 = TypeMeasure::Create([
+            'name' => 'docena',
+        ]);
+
         $material1 = RawMaterial::Create([
             'name' => 'Harina',
             'stock' => $faker->numberBetween(1,100 ),

@@ -80,8 +80,8 @@
                 </div>
                 <form method="POST" action="{{ route('admin.material.delete') }}">
                     @csrf
-                    <div class="modal-body">
-                    </div>
+                    {{-- <div class="modal-body">
+                    </div> --}}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <input type="hidden" name="id" value="{{ $material->id }}">

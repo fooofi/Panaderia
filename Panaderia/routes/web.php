@@ -62,13 +62,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/client/create', [Web\ClientController::class, 'create'])->name('client.create');
         
         Route::post('/client/create', [Web\ClientController::class, 'store'])->name('client.create');
+        
+        Route::post('/client/delete', [Web\ClientController::class, 'client_delete'])->name('client.delete');
 
         Route::get('/dealer', [Web\DealerController::class, 'index'])->name('dealer');
         
         Route::get('/dealer/create', [Web\DealerController::class, 'create'])->name('dealer.create');
         
         Route::post('/dealer/create', [Web\DealerController::class, 'store'])->name('dealer.create');
-
+        
+        Route::post('/dealer/delete', [Web\DealerController::class, 'dealer_delete'])->name('dealer.delete');
+        
         Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
         // Admin Routes
         // Route::get('/organizations', [Web\OrganizationController::class, 'index'])->name('organizations');

@@ -67,6 +67,10 @@
                                 @if(count($products) == 0)
                                     <tr>
                                         <td class="text-center text-value-lg">No ha creado ningún producto</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 @endif
                             </tbody>

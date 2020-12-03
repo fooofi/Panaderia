@@ -36,6 +36,7 @@ class HomeController extends Controller
                 'quantity' => $production->quantity,
                 'decrease' => $production->decrease,
                 'date'      => $production->date_create(),
+                'created_at' => $production->created_at,
                 'quantity_in_quintals' => $production->quantity_in_quintals,
                 'efective_decrease' => $production->efective_decrease,
                 'cost' => $production->cost,
@@ -45,6 +46,8 @@ class HomeController extends Controller
             return $production->created_at->isToday();
         })
         ->paginate();
+
+        $totalIncome = 0;
         $orders = Order::all()->map(function ($order) {
             $productions = $order->productions->map(function($production) use ($order)
             {
@@ -72,6 +75,7 @@ class HomeController extends Controller
                 'dealer' => $order->dealer->name,
                 'detail' => $order->detail,
                 'total_to_pay' => $order->total_to_pay,
+                'created_at' => $order->created_at,
                 // 'decrease' => $order->decrease,
                 'productions' => $productions
             ];
@@ -80,12 +84,19 @@ class HomeController extends Controller
             return $order->created_at->isToday();
         })
         ->paginate();
+
+        foreach ($orders as $order) 
+        {
+            $totalIncome += $order->total_to_pay;
+        }
+
+        
         return view('admin.dashboard', [
             'productions' => $productions,
             'orders' => $orders,
             'countProduction' => $productions->count(),
             'countOrder' => $orders->count(),
-            'totalIncome' => 1,
+            'totalIncome' => $totalIncome,
         ]);
     }
 
