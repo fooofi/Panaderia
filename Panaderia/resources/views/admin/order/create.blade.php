@@ -61,27 +61,33 @@
                                         <div class="form-group col-md-2">
                                             <label class="c-switch c-switch-lg c-switch-pill c-switch-primary">
                                                 <label for="production_checkbox-{{ $production->id }}" class="text-nowrap">{{ $production->name }}</label>
-                                                <input type="checkbox" class="c-switch-input" name="production_checkbox-{{ $production->id }}" id="production_checkbox-{{ $production->id }}">
+                                                <input type="checkbox" class="c-switch-input" data-id="{{ $production->id }}" name="production_checkbox-{{ $production->id }}" id="production_checkbox-{{ $production->id }}">
                                                 <span class="c-switch-slider"></span>
                                             </label>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-2">
                                             <label for="production_quantity">Cantidad</label>
                                             <div class="input-group">
+                                                <input disabled required type="number" class="form-control" id="production_quantity-{{ $production->id }}" name="production_quantity-{{ $production->id }}" min="0" minlength="9" maxlength="9" />
                                                 <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{ $production->measure }}</span>
                                                 </div>
-                                                <input type="number" class="form-control" id="production_quantity-{{ $production->id }}" name="production_quantity-{{ $production->id }}" min="0" minlength="9" maxlength="9" />
                                             </div>
                                             <div class="invalid-feedback">
                                                 Ingrese una cantidad válida
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">Medida</label>
+
+                                        <div class="form-group col-md-2">
+                                            <label for="production_price_unitary">Precio unidad</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">{{ $production->measure }}</span>
+                                                    <span class="input-group-text">$</span>
                                                 </div>
+                                                <input disabled required type="number" class="form-control" id="production_price_unitary-{{ $production->id }}" name="production_price_unitary-{{ $production->id }}" min="0" minlength="9" maxlength="9" />
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Ingrese un precio válido
                                             </div>
                                         </div>
 
@@ -89,7 +95,7 @@
                                 @endforeach
                             </div>
                             <br>
-                            <div class="form-group col-md-8">
+                            {{-- <div class="form-group col-md-8">
                                 <label for="total_to_pay">Total a pagar</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -100,7 +106,7 @@
                                         Ingrese un monto válido.
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <button class="btn btn-primary float-right mb-2" type="submit">Enviar</button>
                         </div>
                     </form>
@@ -130,5 +136,24 @@
             });
         }, false);
     })();
+
+
+    $(document).ready(function() {
+
+        $(".c-switch-input").on('change', function() {
+            let id = $(this).data('id');
+            if (this.checked) {
+
+
+                $("#production_quantity-" + id).prop('disabled', false);
+                $("#production_price_unitary-" + id).prop('disabled', false);
+
+            } else {
+                $("#production_quantity-" + id).prop('disabled', true);
+                $("#production_price_unitary-" + id).prop('disabled', true);
+            }
+        });
+
+    });
 </script>
 @endsection

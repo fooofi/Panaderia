@@ -116,7 +116,7 @@ class OrderController extends Controller
         return Validator::make($data, [
             'client'       => ['required', 'integer'],
             'dealer'       => ['required', 'integer'],
-            'total_to_pay' => ['required', 'integer'],
+            // 'total_to_pay' => ['required', 'integer'],
         ]);
     }
 
@@ -128,7 +128,7 @@ class OrderController extends Controller
             'user_id'      => auth()->user()->id,
             'detail'       => $data['detail'],
             // 'decrease'     => $data['decrease'],
-            'total_to_pay' => $data['total_to_pay'],
+            'total_to_pay' => 0,
         ]);
         
         $productions = Production::all()->map(function ($production) {
@@ -143,6 +143,8 @@ class OrderController extends Controller
             return $production->stock > 0 && $production->created_at->isToday();
         });
 
+        $totalPay = 0;
+
         foreach ($productions as $production) 
         {
             
@@ -150,6 +152,13 @@ class OrderController extends Controller
             {
                 if (isset($data["production_quantity-" . $production->id]) && $data["production_quantity-" . $production->id] != null ) 
                 {
+                    if (isset($data["production_price_unitary-" . $production->id]) && $data["production_price_unitary-" . $production->id] != null ) 
+                    {
+                        $totalPay += $data["production_price_unitary-" . $production->id] * $data["production_quantity-" . $production->id];
+                    }else{
+
+                    }
+                    
                     OrderProduction::Create([
                         'production_id' => $production->id,
                         'order_id' => $order->id,
@@ -164,6 +173,9 @@ class OrderController extends Controller
                 }
             }
         }
+
+        $order->total_to_pay = $totalPay ;
+        $order->save();
     }
 
     public function order_delete(Request $request)

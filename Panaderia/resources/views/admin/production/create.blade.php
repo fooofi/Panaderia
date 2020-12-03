@@ -42,7 +42,7 @@
                                     <select class="custom-select" id="product" name="product" required>
                                         <option selected disabled value="">Selecciona un producto</option>
                                         @foreach($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option value="{{ $product->id }}">{{ $product->name .' - '. $product->measure}}</option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback">
@@ -67,9 +67,9 @@
                                 <div class="form-group col-md-4">
                                     <label for="decrease">Perdida observada</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
+                                        {{-- <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
-                                        </div>
+                                        </div> --}}
                                         <input type="number" class="form-control" id="decrease" name="decrease" min="0"  minlength="0" maxlength="9" value = '0' placeholder="0" />
                                     </div>
                                     <div class="invalid-feedback">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                {{-- <div class="form-group col-md-4">
                                     <label for="quantity_in_quintals">Cantidad en quintales</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -87,7 +87,7 @@
                                     <div class="invalid-feedback">
                                         Ingrese una cantidad válida
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <button class="btn btn-primary float-right mb-2" type="submit">Enviar</button>
                         </div>

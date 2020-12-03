@@ -31,7 +31,7 @@
                                     <th scope="col">Repartidor</th>
                                     <th scope="col">Productos</th>
                                     <th scope="col">Detalle</th>
-                                    <th scope="col">Precio</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>

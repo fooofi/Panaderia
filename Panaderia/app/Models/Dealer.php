@@ -14,6 +14,7 @@ class Dealer extends Model
         'lasname',
         'phone',
         'email',
+        'rut'
     ];
 
     public function orders()

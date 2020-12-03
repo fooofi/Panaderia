@@ -19,6 +19,7 @@ class CreateDealersTable extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('phone');
+            $table->string('rut');
             $table->string('email')->nullable()->default(null);
             
         });

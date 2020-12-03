@@ -49,6 +49,7 @@ class TestSeeder extends Seeder
         $repartidor1 = Dealer::create([
             'name' => 'Repartidor 1',
             'lastname' => '1',
+            'rut' => $faker->regexify('[1-9][0-9]{6,7}-[0-9k]'),
             'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
             'email' => $faker->unique()->safeEmail,
         ]);
@@ -56,6 +57,7 @@ class TestSeeder extends Seeder
         $repartidor2 = Dealer::create([
             'name' => 'Repartidor 2',
             'lastname' => '2',
+            'rut' => $faker->regexify('[1-9][0-9]{6,7}-[0-9k]'),
             'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
             'email' => $faker->unique()->safeEmail,
         ]);
@@ -107,6 +109,34 @@ class TestSeeder extends Seeder
             'stock' => $faker->numberBetween(1,100 ),
             'cost' =>   $faker->numberBetween(1000,50000),
             'type_measure_id' => $measure2->id,
+        ]);
+
+        $material4 = RawMaterial::Create([
+            'name' => 'Huevos',
+            'stock' => $faker->numberBetween(1,100 ),
+            'cost' =>   $faker->numberBetween(12,50),
+            'type_measure_id' => $measure4->id,
+        ]);
+
+        $material5 = RawMaterial::Create([
+            'name' => 'Manteca',
+            'stock' => $faker->numberBetween(1,100 ),
+            'cost' =>   $faker->numberBetween(15000,20000),
+            'type_measure_id' => $measure1->id,
+        ]);
+
+        $material6 = RawMaterial::Create([
+            'name' => 'Aceitunas',
+            'stock' => $faker->numberBetween(1,1000 ),
+            'cost' =>   $faker->numberBetween(7000,9000),
+            'type_measure_id' => $measure1->id,
+        ]);
+
+        $material6 = RawMaterial::Create([
+            'name' => 'Sal',
+            'stock' => $faker->numberBetween(1,1000 ),
+            'cost' =>   $faker->numberBetween(500,1000),
+            'type_measure_id' => $measure1->id,
         ]);
         
         $typeProduct = TypeProduct::Create([

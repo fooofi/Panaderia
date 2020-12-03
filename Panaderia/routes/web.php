@@ -56,8 +56,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/report', [Web\ReportController::class, 'index'])->name('report');
 
         Route::get('/client', [Web\ClientController::class, 'index'])->name('client');
+        
+        Route::get('/client/create', [Web\ClientController::class, 'create'])->name('client.create');
+        
+        Route::post('/client/create', [Web\ClientController::class, 'store'])->name('client.create');
 
         Route::get('/dealer', [Web\DealerController::class, 'index'])->name('dealer');
+        
+        Route::get('/dealer/create', [Web\DealerController::class, 'create'])->name('dealer.create');
+        
+        Route::post('/dealer/create', [Web\DealerController::class, 'store'])->name('dealer.create');
 
         Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
         // Admin Routes

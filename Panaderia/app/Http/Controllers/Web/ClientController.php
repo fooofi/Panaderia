@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-
+use App\Models\Client;
 use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
@@ -25,7 +25,19 @@ class ClientController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('admin.client.index');
+
+        $clients = Client::all()->map(function ($client) {
+            return (object) [
+                'id'      => $client->id,
+                'name'    => $client->name,
+                'phone'    => $client->phone,
+                'direction'    => $client->direction,
+            ];
+        })->paginate();
+        return view('admin.client.index',
+        [
+            'clients' => $clients
+        ]);
 
     }
 

@@ -56,6 +56,7 @@ class ProductionController extends Controller
             return (object) [
                 'id' => $product->id,
                 'name' => $product->name,
+                'measure' => $product->type_measure->name,
             ];
         });
         return view('admin.production.create', [
@@ -77,7 +78,7 @@ class ProductionController extends Controller
             'name'              => ['required', 'string', 'max:255'],
             'quantity'             => ['required', 'integer'],
             'decrease'             => ['required', 'integer'],
-            'quantity_in_quintals' => ['required', 'integer'],
+            // 'quantity_in_quintals' => ['required', 'integer'],
             ]);
     }
 
@@ -92,7 +93,7 @@ class ProductionController extends Controller
             'decrease'             => $data['decrease'],
             'name'                 => $data['name'],
             'quantity'             => $data['quantity'],
-            'quantity_in_quintals' => $data['quantity_in_quintals'],
+            'quantity_in_quintals' => 0,
             'cost'                 => $costProduction
         ]);
         
