@@ -113,16 +113,16 @@ class ProductController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'product_name' => ['required', 'string', 'max:255'],
-            'product_measure' => ['required', 'integer', 'max:255'],
-            'product_type'      => ['required', 'integer', 'max:255'],
-            ]);
+            'product_name'    => ['required', 'string', 'max:255'],
+            'product_measure' => ['required', 'integer'],
+            'product_type'    => ['required', 'integer'],
+        ]);
     }
 
     protected function createProduct(array $data)
     {
         $product = Product::create([
-            'name' => $data['product_name'],
+            'name'            => $data['product_name'],
             'type_product_id' => $data['product_type'],
             'type_measure_id' => $data['product_measure'],
         ]);

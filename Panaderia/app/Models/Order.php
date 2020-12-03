@@ -20,8 +20,29 @@ class Order extends Model
         'decrease'
     ];
 
-    public function products()
+    public function productions()
     {
         return $this->belongsToMany(Production::class)->using(OrderProduction::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function dealer()
+    {
+        return $this->belongsTo(Dealer::class);
+    }
+
+    public function date_create()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+    
 }

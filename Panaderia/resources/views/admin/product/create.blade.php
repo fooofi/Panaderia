@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-8">
-                                    <label for="product_measure">Medida del producto</label>
+                                    <label for="product_measure">Unidad de medida del producto</label>
                                     <select class="custom-select" id="product_measure" name="product_measure" required>
                                         <option selected disabled value="">Selecciona la unidad de medida del producto</option>
                                         @foreach($measures as $measure)

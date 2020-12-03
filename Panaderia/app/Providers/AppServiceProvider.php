@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -48,6 +49,10 @@ class AppServiceProvider extends ServiceProvider
                     'pageName' => $pageName,
                 ]
             );
+        });
+
+        Blade::directive('money', function ($amount) {
+            return "<?php echo '$' . number_format($amount,0,',','.'); ?>";
         });
 
         // Force laravel boot HTTPS in production

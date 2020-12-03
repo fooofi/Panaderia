@@ -23,11 +23,19 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/production', [Web\ProductionController::class, 'index'])->name('production');
 
-        Route::get('/production/create', [Web\ProductionController::class, 'index'])->name('production.create');
+        Route::get('/production/create', [Web\ProductionController::class, 'create'])->name('production.create');
 
+        Route::post('/production/create', [Web\ProductionController::class, 'store'])->name('production.create');
+        
+        Route::post('/production/delete', [Web\ProductionController::class, 'production_delete'])->name('production.delete');
+        
         Route::get('/material', [Web\MaterialController::class, 'index'])->name('material');
-
+        
         Route::get('/material/create', [Web\MaterialController::class, 'create'])->name('material.create');
+        
+        Route::post('/material/create', [Web\MaterialController::class, 'store'])->name('material.create');
+        
+        Route::post('/material/delete', [Web\MaterialController::class, 'material_delete'])->name('material.delete');
 
         Route::get('/product', [Web\ProductController::class, 'index'])->name('product');
 
@@ -40,14 +48,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/order', [Web\OrderController::class, 'index'])->name('order');
 
         Route::get('/order/create', [Web\OrderController::class, 'create'])->name('order.create');
-
+        
+        Route::post('/order/create', [Web\OrderController::class, 'store'])->name('order.create');
+        
+        Route::post('/order/delete', [Web\OrderController::class, 'order_delete'])->name('order.delete');
+        
         Route::get('/report', [Web\ReportController::class, 'index'])->name('report');
 
         Route::get('/client', [Web\ClientController::class, 'index'])->name('client');
 
         Route::get('/dealer', [Web\DealerController::class, 'index'])->name('dealer');
 
-        
+        Route::get('/dispatch', [Web\DispatchController::class, 'index'])->name('dispatch');
         // Admin Routes
         // Route::get('/organizations', [Web\OrganizationController::class, 'index'])->name('organizations');
 

@@ -47,14 +47,14 @@ class TestSeeder extends Seeder
             ->assignRole('admin');
 
         $repartidor1 = Dealer::create([
-            'name' => 'Repartidor',
+            'name' => 'Repartidor 1',
             'lastname' => '1',
             'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
             'email' => $faker->unique()->safeEmail,
         ]);
 
         $repartidor2 = Dealer::create([
-            'name' => 'Repartidor',
+            'name' => 'Repartidor 2',
             'lastname' => '2',
             'phone' => '+569'.$faker->numberBetween(20000000,99999999 ),
             'email' => $faker->unique()->safeEmail,
@@ -119,6 +119,12 @@ class TestSeeder extends Seeder
             'type_measure_id' => $measure1->id,
         ]);
 
+        $product2 = Product::create([
+            'name' => 'Pan Molde',
+            'type_product_id' => $typeProduct->id,
+            'type_measure_id' => $measure1->id,
+        ]);
+
         ProductRawMaterial::Create([
             'product_id' => $product->id,
             'raw_material_id' => $material1->id,
@@ -128,6 +134,18 @@ class TestSeeder extends Seeder
         ProductRawMaterial::Create([
             'product_id' => $product->id,
             'raw_material_id' => $material2->id,
+            'quantity' => $faker->numberBetween(1,10 ),
+        ]);
+
+        ProductRawMaterial::Create([
+            'product_id' => $product2->id,
+            'raw_material_id' => $material1->id,
+            'quantity' => $faker->numberBetween(1,10 ),
+        ]);
+
+        ProductRawMaterial::Create([
+            'product_id' => $product2->id,
+            'raw_material_id' => $material3->id,
             'quantity' => $faker->numberBetween(1,10 ),
         ]);
     }
