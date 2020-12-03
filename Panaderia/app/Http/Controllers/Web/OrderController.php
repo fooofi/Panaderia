@@ -65,7 +65,6 @@ class OrderController extends Controller
         return view('admin.order.index', [
             'orders' => $orders,
         ]);
-        return view('admin.order.index');
 
     }
     public function create()
